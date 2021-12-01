@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:playstation_dashboard/config/constants.dart';
+import 'package:playstation_dashboard/home_controller.dart';
+import 'package:playstation_dashboard/screens/shop_game_screen.dart';
+import 'package:playstation_dashboard/widgets/header.dart';
+import 'package:playstation_dashboard/widgets/side_menu.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => HomeController(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -37,7 +47,23 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(),
+        child: Column(
+          children: [
+            // header
+            const Header(),
+            // body
+            Expanded(
+              child: Row(
+                children: const [
+                  // SideMenu
+                  SideMenu(),
+                  // shop game screen
+                  ShopGameScreen(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
